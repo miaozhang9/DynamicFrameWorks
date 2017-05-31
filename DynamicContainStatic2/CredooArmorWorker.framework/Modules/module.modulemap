@@ -1,0 +1,6 @@
+framework module CredooArmorWorker {
+  umbrella header "CredooArmorWorker.h"
+
+  export *
+  module * { export * }
+}

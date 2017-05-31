@@ -1,0 +1,231 @@
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+            <script type="text/javascript" src="local_intercept/www/cordova.js"></script>
+            <style>
+                input {
+                    width: 80%;
+                    height: 40;
+                    margin-left:10%;
+                    text-align:center;
+                    border-width:1px;
+                    border-color:#333333;
+                    border-style:solid;
+                    font-size:16px;
+                    vertical-align:middle;
+                    margin-bottom: 10px !important;
+                    padding-top: 10px !important;
+                    margin-top: 10px !important;
+                }
+            </style>
+            
+            <script language="javascript">
+                // 获取SDK版本号
+                function fetchVersion() {
+                    function success(result){
+                        function onConfirm(buttonIndex) {
+                            navigator.notification.alert('You selected button ' + buttonIndex, null, '提示','OK');
+                        }
+                        navigator.notification.confirm('Version = '+result, onConfirm);
+                    }
+                    QHBasicMessage.getSDKVersion(success, null)
+                }
+                // 获取设备和app的一些信息
+                function getDeviceMessage() {
+                    function onSuccess(result) {
+                        alert(JSON.stringify(result));
+                        //navigator.notification.alert(result, null, '提示','OK');
+                    };
+                    function onError(error) {
+                    };
+                    QHBasicMessage.getSomeMessage(onSuccess,onError);
+                }
+                // 设置navigationBar的title
+                function setBarTitle(title) {
+                    QHNavigationBar.setNaviBarTitle(title)
+                }
+                // 设置是否显示navigationBar
+                function showBar(show) {
+                    QHNavigationBar.showNavigationBar(show);
+                }
+                // 获取当前位置
+                function getCurrentPosition() {
+                    function onSuccess (result) {
+                        navigator.notification.alert(JSON.stringify(result), null, '提示','OK');
+                    };
+                    function onError(error) {
+
+                    }
+                navigator.geolocation.getCurrentPosition(onSuccess, onError);
+            }
+            // watchPosition
+            function watchCurrentPosition () {
+                function onSuccess (result) {
+                    navigator.notification.alert(JSON.stringify(result), null, '提示','OK');
+                };
+                function onError(error) {
+                }
+                
+                var options = { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true };
+                
+                navigator.geolocation.watchPosition(onSuccess, onError, options);
+            }
+            
+            // 人脸识别
+                function faceRecognition() {
+                    function onSuccess (result) {
+                        navigator.notification.alert(result.base64Img, null, '提示','OK');
+                       // document.getElementById('faceRecognitionImageId').src = result;
+                    };
+                    function onError(error) {
+                    }
+                    
+                    QHCamera.faceRecognition(onSuccess,onError, ['10'])
+
+                }
+                // 拍摄人像
+                function fetchFace() {
+                    function onSuccess(result) {
+                        navigator.notification.alert(result.base64Img, null, '提示','OK');
+                    };
+                    
+                    function onError(error) {
+                    };
+                    QHCamera.fetchFace(onSuccess
+                                           ,onError, ['10']);
+                }
+                // 获取联系人电话号码
+                function getContact() {
+                    function onSuccess(result) {
+                        navigator.notification.alert(JSON.stringify(result), null, '提示','OK');
+                    };
+                
+                    function onError(error) {
+                    };
+                    QHContacts.getContactProperty(onSuccess,onError);
+                }
+                // 扫一扫
+                function scanClick() {
+                    function onSuccess(result) {
+                        navigator.notification.alert(JSON.stringify(result), null, '提示','OK');
+                    };
+                    function onError(error) {
+                    };
+                    QHScanQRCode.scanQRCode(onSuccess,onError);
+                }
+                // 删除文件
+                function deleteFile(filePath) {
+                    function onSuccess() {
+                        navigator.notification.alert('删除成功', null, '提示','OK');
+                    };
+                    function onError(errorInfo) {
+                        navigator.notification.alert(JSON.stringify(errorInfo), null, '提示','OK');
+                    };
+                    QHCamera.deleteFile(onSuccess, onError, ["/user/ffsf/fsfs/fsf"]);
+                }
+            function fetchCard(size) {
+                function onSuccess(result) {
+                    navigator.notification.alert(result.base64Img, null, '提示','OK');
+                };
+                function onError(errorInfo) {
+                };
+                QHCamera.fetchCard(onSuccess, onError, [' ', ' ', ' '])
+            }
+
+            function sheet() {
+                function onSuccess(index) {
+                    navigator.notification.alert(index, null, '提示','OK');
+                };
+                function onError(errorInfo) {
+                    navigator.notification.alert(JSON.stringify(errorInfo), null, '提示','OK');
+                };
+                QHPop.sheet(onSuccess, onError, ['标题', '副标题',['按钮1', '按钮2']])
+            }
+            function pickPhoto() {
+                QHCamera.pickPhoto(null, null, [])
+            }
+            
+            function setBarColor(color) {
+            
+                QHNavigationBar.setNaviBarColor(color)
+            }
+            
+            function setBarTitleColor(color) {
+                
+                QHNavigationBar.setNavibarTitleColor(color)
+            }
+            
+            function getDeviceInfo() {
+                function onSuccess(result) {
+                    alert(JSON.stringify(result));
+                    //navigator.notification.alert(result, null, '提示','OK');
+                };
+                function onError(error) {
+                };
+                
+                QHBasicMessage.getDeviceInfo(onSuccess,onError);
+            }
+            
+            function getAgentUserInfo() {
+                function onSuccess(result) {
+                    alert(JSON.stringify(result));
+                    //navigator.notification.alert(result, null, '提示','OK');
+                };
+                function onError(error) {
+                };
+                
+                QHBasicMessage.getAgentUserInfo(onSuccess,onError);
+            }
+            
+            function openNewPageWithUrl(url) {
+                
+                QHNavigationBar.openNewPageWithUrl(url);
+            }
+            
+            function closeAllPage() {
+                
+                QHNavigationBar.closeAllPage();
+            }
+
+            function openLaunchLoginPage() {
+                
+                QHNavigationBar.openLaunchLoginPage();
+            }
+
+
+
+            </script>
+            <title>Tools List</title>
+            </head>
+
+    <body>
+        <h1>Tools List</h1>
+        <a href="https://www.baidu.com">本地_百度一下</a>
+        <input type="button" value="sdk版本号" onclick="fetchVersion()" />
+        <input type="button" value="设备和app信息" onclick="getDeviceMessage()" />
+        <input type="button" value="设置Navigationbar的title" onclick="setBarTitle('测试用例')" />
+        <input type="button" value="显示Navigationbar" onclick="showBar(true)" />
+        <input type="button" value="隐藏Navigationbar" onclick="showBar(false)" />
+        <input type="button" value="获取定位" onclick="getCurrentPosition()" />
+        <input type="button" value="查看位置-实时刷新" onclick="watchCurrentPosition()" />
+        <input type="button" value="人脸识别" onclick="faceRecognition()" />
+        <input type="button" value="拍摄人像" onclick="fetchFace()" />
+        <input type="button" value="获取身份证照片" onclick="fetchCard('30')" />
+        <input type="button" value="联系人" onclick="getContact()" />
+        <input type="button" value="扫一扫" onclick="scanClick()" />
+        <input type="button" value="sheet" onclick="sheet()" />
+        <input type="button" value="pickPhoto" onclick="pickPhoto()" />
+        <input type="button" value="改变导航条颜色" onclick="setBarColor('#ffce00')" />
+        <input type="button" value="改变Title颜色" onclick="setBarTitleColor('#cc0000')" />
+        <input type="button" value="获取DeviceInfo" onclick="getDeviceInfo()" />
+        <input type="button" value="获取用户账户信息(宿主app协议返回)" onclick="getAgentUserInfo()" />
+        <input type="button" value="open新的页面(宿主app协议)" onclick="openNewPageWithUrl('url')" />
+        <input type="button" value="关闭打开的页面(宿主app协议)" onclick="closeAllPage()" />
+        <input type="button" value="调起登录的页面(宿主app协议)" onclick="openLaunchLoginPage()" />
+        
+        
+        
+    </body>
+</html>
